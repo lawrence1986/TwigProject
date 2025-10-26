@@ -1,8 +1,6 @@
 # TwigProject
 
-# TwigProject
-
-# Ticcket - Ticket Management Web App (Twig Implementation)
+# Ticket - Ticket Management Web App (Twig Implementation)
 
 A modern ticket management web application built with PHP, Twig templating engine, and vanilla JavaScript. This implementation is part of the HNG Stage 2 Multi-Framework Ticket Web App task.
 
