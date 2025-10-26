@@ -1,0 +1,49 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Tickets - Ticcket{% endblock %}
+
+{% block content %}
+  <div class="min-h-screen flex flex-col bg-[#f9fafb]">
+    <main class="flex-1 relative overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        {# Header Section #}
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Tickets</h1>
+            <p class="text-gray-600">
+              Manage and track all your support tickets
+            </p>
+          </div>
+          <button
+            id="createTicketBtn"
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-[#2563eb] text-white hover:bg-[#1d4ed8] h-10 px-6 py-2 transition-colors"
+          >
+            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+            Create Ticket
+          </button>
+        </div>
+
+        <div id="ticketsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="col-span-full text-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+            <p class="mt-4 text-gray-500">Loading tickets...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  {# Include dialogs #}
+  {% include 'partials/ticket-dialog.twig' %}
+  {% include 'partials/delete-dialog.twig' %}
+{% endblock %}
+
+{% block scripts %}
+  <script type="module" src="{{ base_path }}/assets/js/pages/tickets.js"></script>
+  <script>
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+{% endblock %}

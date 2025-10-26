@@ -1,0 +1,86 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}{{ mode == 'signup' ? 'Sign Up' : 'Login' }} - Ticcket{% endblock %}
+
+{% block content %}
+  <div class="min-h-screen flex items-center justify-center bg-[#f9fafb] relative overflow-hidden px-4">
+    {% include 'partials/bg-circle.twig' with {right: '-10%', top: '10%'} %}
+    {% include 'partials/bg-circle.twig' with {left: '-10%', bottom: '10%'} %}
+    
+    <div class="w-full max-w-md p-8 shadow-xl relative z-10 bg-white rounded-lg border border-slate-200">
+      <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold mb-2" id="authTitle">
+          {{ mode == 'signup' ? 'Create Account' : 'Welcome Back' }}
+        </h1>
+        <p class="text-gray-600" id="authSubtitle">
+          {{ mode == 'signup' ? 'Sign up to start managing your tickets' : 'Enter your credentials to access your account' }}
+        </p>
+      </div>
+
+      <form id="authForm" class="space-y-4">
+        <input type="hidden" id="authMode" value="{{ mode }}">
+        
+        <div class="space-y-2" id="nameField" style="{{ mode == 'login' ? 'display: none;' : '' }}">
+          <label for="name" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            placeholder="John Doe"
+            class="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
+          <p class="text-red-500 text-sm hidden" id="nameError"></p>
+        </div>
+
+        <div class="space-y-2">
+          <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            class="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
+          <p class="text-red-500 text-sm hidden" id="emailError"></p>
+        </div>
+
+        <div class="space-y-2">
+          <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            class="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          />
+          <p class="text-red-500 text-sm hidden" id="passwordError"></p>
+        </div>
+
+        <button
+          type="submit"
+          id="submitBtn"
+          class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#2563eb] text-white hover:bg-[#1d4ed8] h-10 px-4 py-2"
+        >
+          <span id="submitBtnText">{{ mode == 'signup' ? 'Sign Up' : 'Login' }}</span>
+        </button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <button
+          type="button"
+          id="toggleModeBtn"
+          class="text-[#2563eb] hover:underline"
+        >
+          {{ mode == 'login' ? "Don't have an account? Sign up" : "Already have an account? Login" }}
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="module" src="{{ base_path }}/assets/js/pages/auth.js"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Ticcket - Modern Ticket Management{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ base_path }}/assets/index.css" />
+  <!-- Development version -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<!-- Production version -->
+<script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.css" integrity="sha512-VSD3lcSci0foeRFRHWdYX4FaLvec89irh5+QAGc00j5AOdow2r5MFPhoPEYBUQdyarXwbzyJEO7Iko7+PnPuBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  {% block head %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col max-w-[1440px] mx-auto">
+  {% include 'partials/navbar.twig' %}
+  
+  <main class="mx-auto max-w-[1440px] w-full flex-grow">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'partials/footer.twig' %}
+
+  <script type="module" src="{{ base_path }}/assets/js/utils/navbar.js"></script>
+  {% block scripts %}{% endblock %}
+  
+  <script>
+    // Initialize Lucide icons globally
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

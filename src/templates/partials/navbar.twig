@@ -1,0 +1,84 @@
+<nav class="w-full bg-white shadow-md">
+  <div class="mx-auto flex flex-col gap-4 px-5 py-4 md:flex-row md:items-center md:justify-between max-w-[1440px]">
+    <section class="flex w-full flex-row justify-between items-center gap-3 md:flex-row md:items-center md:gap-4">
+      <a href="{{ base_path }}/" class="text-blue-600 text-2xl font-semibold">
+        Ticcket
+      </a>
+
+      <div id="mobileMenuToggle" class="flex flex-col gap-2 md:hidden" style="display: none;">
+        <button
+          type="button"
+          id="menuToggleBtn"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 text-gray-700 transition-colors hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <i data-lucide="menu" id="menuIcon" class="h-5 w-5"></i>
+          <i data-lucide="x" id="closeIcon" class="h-5 w-5 hidden"></i>
+        </button>
+      </div>
+    </section>
+
+    <section id="desktopMenu" class="hidden md:flex flex-row items-center gap-3">
+      <button
+        class="bg-blue-500 hover:bg-blue-600 transition-colors rounded-md px-4 py-2 text-sm font-medium"
+        onclick="window.location.href='{{ base_path }}/dashboard'"
+      >
+        <span class="flex items-center justify-center gap-1 text-white">
+          <i data-lucide="layout-dashboard" class="h-4 w-4"></i>
+          Dashboard
+        </span>
+      </button>
+      <button
+        class="hover:bg-slate-100 rounded-md px-4 py-2 text-sm font-medium transition-colors"
+        onclick="window.location.href='{{ base_path }}/dashboard/tickets'"
+      >
+        <span class="flex items-center justify-center gap-1 text-gray-700">
+          <i data-lucide="ticket" class="h-4 w-4"></i>
+          Tickets
+        </span>
+      </button>
+      <p id="userGreeting" class="text-sm text-gray-600 max-w-[200px] min-w-[100px] text-center">
+        <span class="w-full">Hi, Guest</span>
+      </p>
+      <button
+        id="logoutBtn"
+        type="button"
+        class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-slate-100 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      >
+        <i data-lucide="log-out" class="h-4 w-4"></i>
+        Logout
+      </button>
+    </section>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden">
+    <div class="mx-5 mb-4 flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <button
+        onclick="window.location.href='{{ base_path }}/dashboard'"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      >
+        <i data-lucide="layout-dashboard" class="h-4 w-4"></i>
+        Dashboard
+      </button>
+      <button
+        onclick="window.location.href='{{ base_path }}/dashboard/tickets'"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      >
+        <i data-lucide="ticket" class="h-4 w-4"></i>
+        Tickets
+      </button>
+      <div class="flex flex-col items-center gap-2">
+        <p id="userGreetingMobile" class="text-sm text-gray-600">Hi, Guest</p>
+        <button
+          id="logoutBtnMobile"
+          type="button"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-slate-200 px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-slate-100 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          <i data-lucide="log-out" class="h-4 w-4"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

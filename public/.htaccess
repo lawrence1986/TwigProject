@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /hng-stage-2-twig/public/
+
+# Don't rewrite files or directories that exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite everything else to index.php
+RewriteRule ^(.*)$ index.php [L,QSA]

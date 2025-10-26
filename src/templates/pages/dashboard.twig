@@ -1,0 +1,104 @@
+{% extends 'layouts/base.twig' %}
+
+{% block title %}Dashboard - Ticcket{% endblock %}
+
+{% block content %}
+  <div class="min-h-screen flex flex-col bg-[#f9fafb]">
+    <main class="flex-1 relative overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
+          <p class="text-gray-600">
+            Overview of your ticket management system
+          </p>
+        </div>
+
+        {# Stats Grid #}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {# Total Tickets #}
+          <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-gray-600 mb-2">Total Tickets</p>
+                <p class="text-4xl font-bold" id="totalTickets">0</p>
+              </div>
+              <div class="bg-blue-50 p-3 rounded-lg">
+                <i data-lucide="ticket" class="w-8 h-8 text-[#2563eb]"></i>
+              </div>
+            </div>
+          </div>
+
+          {# Open Tickets #}
+          <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-gray-600 mb-2">Open Tickets</p>
+                <p class="text-4xl font-bold" id="openTickets">0</p>
+              </div>
+              <div class="bg-green-50 p-3 rounded-lg">
+                <i data-lucide="check-circle-2" class="w-8 h-8 text-[#22c55e]"></i>
+              </div>
+            </div>
+          </div>
+
+          {# In Progress #}
+          <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-gray-600 mb-2">In Progress</p>
+                <p class="text-4xl font-bold" id="inProgressTickets">0</p>
+              </div>
+              <div class="bg-amber-50 p-3 rounded-lg">
+                <i data-lucide="clock" class="w-8 h-8 text-[#f59e0b]"></i>
+              </div>
+            </div>
+          </div>
+
+          {# Resolved Tickets #}
+          <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between">
+              <div>
+                <p class="text-gray-600 mb-2">Resolved Tickets</p>
+                <p class="text-4xl font-bold" id="closedTickets">0</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <i data-lucide="x-circle" class="w-8 h-8 text-[#9ca3af]"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {# Recent Activity #}
+        <div class="mt-12">
+          <div class="flex w-full items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Recent Tickets</h2>
+            <button
+              id="createTicketBtn"
+              class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-[#2563eb] text-white hover:bg-[#1d4ed8] h-10 px-6 py-2 transition-colors cursor-pointer"
+            >
+              Create Ticket
+            </button>
+          </div>
+
+          <div id="recentTicketsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {# Loading state #}
+            <div class="col-span-full text-center py-12">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+              <p class="mt-4 text-gray-500">Loading tickets...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="module" src="{{ base_path }}/assets/js/pages/dashboard.js"></script>
+  <script>
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+{% endblock %}

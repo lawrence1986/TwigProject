@@ -1,0 +1,181 @@
+/* Sonner-inspired Toast Styling */
+.toastify {
+  border-radius: 1rem; /* big rounded corners */
+  padding: 1rem 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+  opacity: 0.97;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transform: translateY(-20px);
+  animation: toast-slide 0.35s ease forwards;
+}
+
+.toastify.success {
+  background: linear-gradient(135deg, #4ade80, #16a34a); /* green gradient */
+}
+
+.toastify.error {
+  background: linear-gradient(135deg, #f87171, #dc2626); /* red gradient */
+}
+
+.toastify.info {
+  background: linear-gradient(135deg, #60a5fa, #2563eb); /* blue gradient */
+}
+
+.toastify.warning {
+  background: linear-gradient(135deg, #fbbf24, #d97706); /* yellow/orange */
+}
+
+.toastify:hover {
+  transform: translateY(-24px);
+  opacity: 1;
+  transition: all 0.25s ease;
+}
+
+/* Slide down animation */
+@keyframes toast-slide {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0.97;
+  }
+}
+
+/* Optional icon container */
+.toastify .toast-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .toastify {
+    background: #000;
+    border-color: hsl(0, 0%, 20%);
+    color: hsl(0, 0%, 99%);
+  }
+
+  .toastify.success {
+    background: hsl(150, 100%, 6%);
+    border-color: hsl(147, 100%, 12%);
+    color: hsl(150, 86%, 65%);
+  }
+
+  .toastify.error {
+    background: hsl(358, 76%, 10%);
+    border-color: hsl(357, 89%, 16%);
+    color: hsl(358, 100%, 81%);
+  }
+
+  .toastify.info {
+    background: hsl(215, 100%, 6%);
+    border-color: hsl(223, 43%, 17%);
+    color: hsl(216, 87%, 65%);
+  }
+
+  .toastify.warning {
+    background: hsl(64, 100%, 6%);
+    border-color: hsl(60, 100%, 9%);
+    color: hsl(46, 87%, 65%);
+  }
+}
+
+/* Toast Animation */
+@keyframes sonner-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.toastify {
+  animation: sonner-fade-in 300ms ease forwards;
+}
+
+/* Dialog Animation */
+#ticketDialog[data-state="open"] {
+  animation: dialog-fade-in 200ms ease forwards;
+}
+
+#ticketDialog[data-state="closed"] {
+  animation: dialog-fade-out 200ms ease forwards;
+}
+
+#ticketDialog[data-state="open"] > div {
+  animation: dialog-slide-up 200ms ease forwards;
+}
+
+#ticketDialog[data-state="closed"] > div {
+  animation: dialog-slide-down 200ms ease forwards;
+}
+
+@keyframes dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-slide-down {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

@@ -1,0 +1,33 @@
+# Vendor dependencies (composer install on server)
+/vendor/
+
+# Environment-specific files
+composer.lock
+.env
+.env.local
+
+# Twig cache (regenerated on server)
+/cache/
+
+
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+
+# Logs
+*.log
+/logs/
+
+# Development files
+composer-setup.php
+README.md
