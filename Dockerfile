@@ -1,14 +1,26 @@
 # Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Copy project files to web root
+# Install dependencies
+RUN apt-get update && apt-get install -y git unzip
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copy project files
 COPY . /var/www/html/
 
-# Enable Apache mod_rewrite (needed by frameworks)
+# Set working directory
+WORKDIR /var/www/html
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Expose port 80
+# Expose Apache port
 EXPOSE 80
 
-# Start Apache in the foreground
+# Start Apache
 CMD ["apache2-foreground"]
