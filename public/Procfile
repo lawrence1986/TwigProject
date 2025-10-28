@@ -1,0 +1,28 @@
+- In the root of your `Twig` project, create a file with the name `Procfile`
+   - In the `Procfile` add the following code:
+   - If your `index.php` is in the root folder add this:
+     ```bash
+     php -S 0.0.0.0:$PORT
+     ```
+   - If your `index.php` is in the `src` folder add this:
+     ```bash
+     php -S 0.0.0.0:$PORT -t src
+     ```
+
+2. **Push to GitHub**
+
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+   git push -u origin main
+   ```
+
+3. **Deploy on Railway**
+   - Visit [railway.app](https://railway.app)
+   - Sign up with GitHub
+   - Click "New Project" → "Deploy from GitHub"
+   - Select your repository
+   - Deploy! ✨
+   - Get free `.railway.app` URL or connect custom domain
