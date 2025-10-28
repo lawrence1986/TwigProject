@@ -146,8 +146,8 @@ hng-stage-2-twig/
 
 **Pre-registered User:**
 
-- Email: `test@example.com`
-- Password: `password123`
+- Email: `steph@test.build`
+- Password: `1234567`
 
 **Or create a new account:**
 
