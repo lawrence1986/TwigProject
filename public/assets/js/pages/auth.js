@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clearErrors();
     clearForm();
     
-    // Update URL without reload
-    const newUrl = currentMode === 'login' ? '/auth/login' : '/auth/signup';
+    // Update URL without reload using base-aware helper
+    const newUrl = currentMode === 'login' ? url('auth/login') : url('auth/signup');
     window.history.pushState({}, '', newUrl);
   });
 

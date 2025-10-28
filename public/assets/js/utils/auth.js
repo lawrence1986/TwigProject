@@ -104,7 +104,7 @@ export function isAuthenticated() {
   return user !== null && user.sessionActive === true;
 }
 
-export function requireAuth(loginUrl = "/login") {
+export function requireAuth(loginUrl = "/auth/login") {
   if (!isAuthenticated()) {
     window.location.href = loginUrl;
   }

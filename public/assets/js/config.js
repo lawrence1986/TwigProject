@@ -1,12 +1,21 @@
-// Get base path from the current script's path
+// Determine base path
+// 1) Prefer server-provided base path (set in base.twig)
+// 2) Fallback to deriving from current script path
+// 3) Normalize '/' to '' for root hosting (e.g., http://localhost:8000/)
 const scriptPath = document.currentScript?.src || "";
 const publicIndex = scriptPath.indexOf("/public/");
-export const BASE_PATH =
-  publicIndex !== -1
-    ? scriptPath.substring(0, publicIndex + 7)
-    : "/hng-stage-2-twig/public";
+let detectedBase = window.__BASE_PATH__ ?? (publicIndex !== -1
+  ? scriptPath.substring(0, publicIndex + 7)
+  : "");
+
+// Normalize
+if (detectedBase === "/") {
+  detectedBase = "";
+}
+
+export const BASE_PATH = detectedBase;
 
 export function url(path) {
   const cleanPath = path.startsWith("/") ? path.substring(1) : path;
-  return `${BASE_PATH}/${cleanPath}`;
+  return `${BASE_PATH}/${cleanPath}`.replace(/\/+/, "/");
 }
