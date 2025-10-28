@@ -1,41 +1,46 @@
-# Use Apache with PHP 8.2
+# Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Install required packages
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev && \
-    docker-php-ext-install pdo pdo_mysql
+  git \
+  unzip \
+  libzip-dev \
+  libonig-dev \
+  && rm -rf /var/lib/apt/lists/*
 
-# Enable Apache mod_rewrite for clean URLs
-RUN a2enmod rewrite
+# Install PHP extensions commonly required by frameworks/libs
+RUN docker-php-ext-install mbstring zip
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer files and install dependencies
-COPY composer.json composer.lock ./
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
-    composer install --no-dev --optimize-autoloader && \
-    rm composer-setup.php
+# Copy project files
+COPY . /var/www/html/
 
-# Copy the rest of the app into the image
-COPY . .
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
-# Set correct file permissions
-RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+# Log PHP errors to STDERR (visible in container logs/Railway logs)
+RUN { \
+  echo 'display_errors=Off'; \
+  echo 'log_errors=On'; \
+  echo 'error_log=/proc/self/fd/2'; \
+} > /usr/local/etc/php/conf.d/error-logging.ini
 
-# Configure Apache to serve from the 'public' directory
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot /var/www/html/public\n\
-    <Directory /var/www/html/public>\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# Set Apache DocumentRoot to public and enable .htaccess overrides
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/000-default.conf \
+  && a2enmod rewrite \
+  && printf "<Directory ${APACHE_DOCUMENT_ROOT}>\n    AllowOverride All\n    Require all granted\n</Directory>\n" > /etc/apache2/conf-available/allow-htaccess.conf \
+  && a2enconf allow-htaccess
 
-# Expose port 80
+# Expose Apache port
 EXPOSE 80
 
-# Start Apache in the foreground
+# Start Apache
 CMD ["apache2-foreground"]
