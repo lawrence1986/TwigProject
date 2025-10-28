@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
   git \
   unzip \
   libzip-dev \
+  libonig-dev \
   && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions commonly required by frameworks/libs
