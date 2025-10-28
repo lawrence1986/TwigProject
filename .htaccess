@@ -1,24 +1,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # If the requested file or directory exists, serve it directly
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+  # Don’t rewrite existing files or directories
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
 
-  # Otherwise, route all requests to index.php
-  RewriteRule ^ index.php [L]
+  # Route everything else to index.php
+  RewriteRule ^ index.php [QSA,L]
 </IfModule>
-
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
-</IfModule>
-RewriteEngine On
-RewriteBase /hng-stage-2-twig/public/
-
-# Don't rewrite files or directories that exist
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Rewrite everything else to index.php
-RewriteRule ^(.*)$ index.php [L,QSA]
