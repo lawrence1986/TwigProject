@@ -6,22 +6,23 @@
       <div class="w-full max-w-2xl px-6 h-full flex flex-col justify-center items-center gap-8">
         <div class="mx-auto text-center space-y-6 text-sm text-gray-500">
           <p class="text-2xl font-semibold text-black">
-            Confidently in 
-            <span class="text-blue-600"> Control</span>
+            Manage Your Tickets with
+            <span class="text-blue-600"> Confidence</span>
           </p>
           <p class="max-w-prose mx-auto">
-            <b>A next-generation ticket management system built for efficiency.
-Empower your team to stay organized, resolve issues faster, and provide exceptional support every time.
-Get started in seconds.</b>
+            The modern ticket management system that helps teams stay
+            organized, resolve issues faster, and deliver exceptional support.
+            Get started in seconds.
           </p>
         </div>
         <div class="flex gap-2">
-          <button
+          <a
             id="getStartedBtn"
-            class="cursor-pointer bg-blue-500 text-white hover:bg-blue-600 rounded-md text-sm font-medium transition-colors px-4 py-2"
+            href="{{ base_path }}/auth/signup"
+            class="cursor-pointer bg-blue-500 text-white hover:bg-blue-600 rounded-md text-sm font-medium transition-colors px-4 py-2 inline-block"
           >
             Get started
-          </button>
+          </a>
           <a
             href="{{ base_path }}/auth/login"
             class="cursor-pointer border border-gray-300 hover:bg-gray-200 rounded-md text-sm font-medium transition-colors px-4 py-2 inline-block"
