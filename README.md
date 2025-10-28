@@ -57,12 +57,7 @@ Edit `config.php` to match your environment:
 
 ### 4. Start the Server
 
-**Option A: Using XAMPP/WAMP**
-
-- Ensure Apache is running
-- Access the app at: `http://localhost/hng-stage-2-twig/public/`
-
-**Option B: Using PHP Built-in Server**
+**Using PHP Built-in Server**
 
 ```bash
 cd public
