@@ -58,16 +58,16 @@ $router = new Router($twig, $config['base_path']);
 $router->get('/', function($twig) {
     $landingPageBoxes = [
         [
-            'title' => 'Monitor it all',
-            'description' => 'Experience smarter project management built for teams that value speed, clarity, and collaboration..',
+            'title' => 'Track everything',
+            'description' => 'Manage tickets, tasks, and projects all in one place with our intuitive interface.',
         ],
         [
-            'title' => 'Speed That Works for You',
-            'description' => 'From ticket creation to resolution, every click is instant.',
+            'title' => 'Lightning fast',
+            'description' => 'Built for speed. Create, update, and resolve tickets in seconds.',
         ],
         [
-            'title' => 'Stay in Control',
-            'description' => 'Bring clarity to your workflow with smart, built-in organization features.',
+            'title' => 'Stay organized',
+            'description' => 'Keep your workspace tidy and focused with powerful organizational tools.',
         ],
     ];
 
@@ -109,4 +109,13 @@ if (!empty($basePath) && strpos($uri, $basePath) === 0) {
 }
 
 // Dispatch the route
-$router->dispatch($uri, $_SERVER['REQUEST_METHOD']);
+try {
+    $router->dispatch($uri, $_SERVER['REQUEST_METHOD']);
+} catch (Throwable $e) {
+    // Log full error to server logs (visible in Railway logs)
+    error_log('[Router Error] ' . $e->getMessage() . "\n" . $e->getTraceAsString());
+
+    // Return a minimal error page without exposing internals
+    http_response_code(500);
+    echo $twig->render('pages/404.twig');
+}
