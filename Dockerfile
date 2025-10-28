@@ -39,8 +39,16 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
   && printf "<Directory ${APACHE_DOCUMENT_ROOT}>\n    AllowOverride All\n    Require all granted\n</Directory>\n" > /etc/apache2/conf-available/allow-htaccess.conf \
   && a2enconf allow-htaccess
 
-# Expose Apache port
-EXPOSE 80
+# Set Railway port environment variable
+ENV PORT=80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Expose Apache port
+EXPOSE $PORT
+
+# Start Apache on Railway's assigned port
+CMD sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf && \
+    sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/" /etc/apache2/sites-available/000-default.conf && \
+    apache2-foreground
+
+
+
